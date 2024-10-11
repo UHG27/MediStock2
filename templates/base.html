@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MediStock{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+    <header>
+        <div class="header-left">
+            <img src="{% static '' %}" alt="" class="logo">
+            <h1>Sistema gestor de inventario</h1>
+        </div>
+    </header>
+
+    <main>
+        <div class="content">
+            {% block content %}
+            
+            {% endblock %}
+        </div>
+    </main>
+
+    <footer>
+        <p> {% now "Y" %} Farmaica Generales</p>
+    </footer>
+</body>
+</html>
