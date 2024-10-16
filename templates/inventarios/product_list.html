@@ -1,0 +1,8 @@
+<h1>Product List</h1>
+<ul>
+    {% for product in products %}
+        <li>
+            <a href="{% url 'product_detail' product.sku %}">{{ product.name }}</a> - {{ product.price }} USD
+        </li>
+    {% endfor %}
+</ul>
