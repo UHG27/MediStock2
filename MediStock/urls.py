@@ -16,14 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from django.http import HttpResponse
-#from . import views
-
-def home(request):
-    return HttpResponse("Página principal")
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('inventarios/', include('apps.inventarios.urls')),
-    path('ventas/', include('apps.ventas.urls')),
+    
 ]
