@@ -1,11 +1,46 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Product
+from django.shortcuts import render, redirect
+from .models import Producto
 
-# Create your views here.
-def product_list(request):
-    products = Product.objects.all()
-    return render(request, 'inventarios/product_list.html', {'products': products})
 
-def product_detail(request, sku):
-    product = get_object_or_404(Product, sku=sku)
-    return render(request, 'inventorios/product_detail.html', {'product': product})
+def home(request):
+    productos = Producto.objects.all()
+    return render(request, "product.html", {"productos": productos})
+
+def registrarProducto(request):
+    nombre=request.POST['txtNombre']
+    descripcion=request.POST['txtDescripcion']
+    precio=request.POST['txtPrecio']
+    stock=request.POST['numStock']
+    fecha_creacion=request.POST['txtFechaDeCreacion']
+
+    producto = Producto.objects.create(
+        nombre=nombre, descripcion=descripcion, precio=precio, stock=stock, fecha_creacion=fecha_creacion)
+    return redirect('/')
+
+def edicionProducto(request, nombre):
+    producto = Producto.objects.get(nombre=nombre)
+    return render(request, "edicionProducto.html", {"nombre":nombre})
+
+def editarProducto(request):
+    nombre=request.POST['txtNombre']
+    descripcion=request.POST['txtDescripcion']
+    precio=request.POST['txtPrecio']
+    stock=request.POST['numStock']
+    fecha_creacion=request.POST['txtFechaDeCreacion']
+
+    producto = Producto.objects.get(nombre=nombre)
+    producto.nombre = nombre
+    producto.descripcion = descripcion
+    producto.precio = precio
+    producto.fecha_creacion = fecha_creacion
+    producto.stock = stock
+
+    producto.save()
+
+    return redirect('/')
+
+def eliminarProducto(request, nombre):
+    producto = Producto.objects.get(nombre=nombre)
+    producto.delete()
+
+    return redirect('/')
