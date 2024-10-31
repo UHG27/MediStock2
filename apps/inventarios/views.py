@@ -3,10 +3,12 @@ from .models import Producto
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
 
+def Home(request):
+    return render(request, 'base.html')
 
 def home(request):
     productos = Producto.objects.all()
-    return render(request, "inventarios/product.html", {"productos": productos})
+    return render(request, "inventarios/product.html", {"productos": productos})#
 
 def registrarProducto(request):
     nombre=request.POST['txtNombre']
