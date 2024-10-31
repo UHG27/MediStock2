@@ -28,6 +28,11 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_REDIRECT_URL = '/login/'  # Cambia esto por la URL de tu página de login
+
+
 # Application definition
 
 INSTALLED_APPS = [
