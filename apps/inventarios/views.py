@@ -1,4 +1,5 @@
 
+
 import requests
 from django.shortcuts import render, redirect
 from .models import Producto
@@ -7,11 +8,18 @@ from .models import Producto
 
 
 
+import requests
+from django.shortcuts import render, redirect
+from .models import Producto
+
+
 def home(request):
     productos = Producto.objects.all()
     return render(request, "product.html", {"productos": productos})
 
 def registrarProducto(request):
+
+
 
     # Obtener los datos del formulario
     nombre = request.POST['txtNombre']
@@ -60,6 +68,7 @@ def registrarProducto(request):
     producto = Producto.objects.create(
         nombre=nombre, descripcion=descripcion, precio=precio, stock=stock, fecha_creacion=fecha_creacion)
 
+
     return redirect('/')
 
 def edicionProducto(request, nombre):
@@ -93,11 +102,14 @@ def editarProducto(request):
 
     producto = Producto.objects.get(nombre=nombre)
 
+
     producto.nombre = nombre
     producto.descripcion = descripcion
     producto.precio = precio
     producto.fecha_creacion = fecha_creacion
     producto.stock = stock
+
+
 
 
     producto.save()
@@ -106,11 +118,17 @@ def editarProducto(request):
 
 def eliminarProducto(request, nombre):
 
+
     productos = Producto.objects.filter(nombre=nombre)
     if productos.exists():
         productos.delete()  # Eliminar todos los productos con el nombre dado
 
     producto = Producto.objects.get(nombre=nombre)
     producto.delete()
+
+
+    productos = Producto.objects.filter(nombre=nombre)
+    if productos.exists():
+        productos.delete()  # Eliminar todos los productos con el nombre dado
 
     return redirect('/')
