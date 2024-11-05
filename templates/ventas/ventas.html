@@ -1,0 +1,37 @@
+{% extends "inventarios/base.html" %}
+
+{% block title %}Registrar Venta{% endblock %}
+
+{% block body %}
+<h2>Registrar Venta</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Registrar Venta</button>
+</form>
+<h2>Lista de Ventas</h2>
+<div class="table-responsive py-3">
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Fecha</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for venta in ventas %}
+        <tr>
+            <td>{{ venta.id }}</td>
+            <td>{{ venta.producto.nombre }}</td> <!-- Asegúrate de que exista una relación entre venta y producto -->
+            <td>{{ venta.cantidad }}</td>
+            <td>{{ venta.precio }}</td>
+            <td>{{ venta.fecha }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</div>
+{% endblock %}

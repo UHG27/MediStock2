@@ -1,0 +1,21 @@
+from django.shortcuts import render, redirect
+from .forms import VentaForm
+from .models import Venta
+from apps.inventarios.models import Producto
+
+def registrar_venta(request):
+    if request.method == 'POST':
+        form = VentaForm(request.POST)
+        if form.is_valid():
+            venta = form.save(commit=False)
+            venta.total = venta.producto.precio * venta.cantidad
+            venta.save()
+            return redirect('ventas')  # Redirigir a la lista de ventas o la página deseada
+    else:
+        form = VentaForm()
+    
+    return render(request, 'ventas/ventas.html', {'form': form})
+
+def listar_ventas(request):
+    ventas = Venta.objects.all()  # Obtiene todas las ventas
+    return render(request, 'ventas/lista_ventas.html', {'ventas': ventas})

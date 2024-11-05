@@ -3,12 +3,10 @@ from .models import Producto
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login
 
-def Home(request):
-    return render(request, 'base.html')
 
 def home(request):
     productos = Producto.objects.all()
-    return render(request, "inventarios/product.html", {"productos": productos})#
+    return render(request, "inventarios/product.html", {"productos": productos})
 
 def registrarProducto(request):
     nombre=request.POST['txtNombre']
@@ -55,7 +53,7 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('login')  # Redirige a la página principal o a donde quieras
+            return redirect('home')  # Redirige a la página principal o a donde quieras
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})  # Asegúrate de que la plantilla sea 'login.html'
