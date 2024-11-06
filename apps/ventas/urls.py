@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import registrar_venta
+from .views import registrar_venta, listar_ventas
 from . import views
 
 urlpatterns = [

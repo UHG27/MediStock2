@@ -10,12 +10,11 @@ def registrar_venta(request):
             venta = form.save(commit=False)
             venta.total = venta.producto.precio * venta.cantidad
             venta.save()
-            return redirect('ventas')  # Redirigir a la lista de ventas o la página deseada
+            return redirect('ventas')
     else:
         form = VentaForm()
-    
     return render(request, 'ventas/ventas.html', {'form': form})
 
 def listar_ventas(request):
-    ventas = Venta.objects.all()  # Obtiene todas las ventas
+    ventas = Venta.objects.all()
     return render(request, 'ventas/lista_ventas.html', {'ventas': ventas})
