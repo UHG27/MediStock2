@@ -18,3 +18,4 @@ def registrar_venta(request):
 def listar_ventas(request):
     ventas = Venta.objects.all()
     return render(request, 'ventas/lista_ventas.html', {'ventas': ventas})
+
