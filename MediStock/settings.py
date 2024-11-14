@@ -84,13 +84,26 @@ WSGI_APPLICATION = 'MediStock.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'MediStock.db',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'MediStock.db',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'medistock',
+        'USER': 'root',
+        'PASSWORD': 'qwerty',
+        'HOST': 'localhost',
+        'PORT': '3306'
     }
 }
 
+# import pymysql
+# pymysql.install_as_MySQLdb()
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
