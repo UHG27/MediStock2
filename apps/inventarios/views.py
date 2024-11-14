@@ -1,14 +1,12 @@
 from django.shortcuts import render, redirect
 from .models import Producto
 from django.contrib.auth.forms import AuthenticationForm
-<<<<<<< HEAD
 
-def Home(request):
+def home(request):
     return render(request, 'templates/base.html')
-=======
+
 from django.contrib.auth import login
 
->>>>>>> 58c7db769ec4714c4889351fe9ed5067f438edb7
 
 def lista_productos(request):  # Agrega esta función
     productos = Producto.objects.all()
@@ -53,12 +51,11 @@ def eliminarProducto(request, nombre):
 
     return redirect('/inventarios/')
 
-<<<<<<< HEAD
+
 def loginView(request):
     return render(request, 'login.html', {
         'form': AuthenticationForm()
     })
-=======
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
@@ -69,4 +66,4 @@ def login_view(request):
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})  # Asegúrate de que la plantilla sea 'login.html'
->>>>>>> 58c7db769ec4714c4889351fe9ed5067f438edb7
+
