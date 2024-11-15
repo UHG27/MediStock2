@@ -1,14 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import Producto
 from django.contrib.auth.forms import AuthenticationForm
-
-def home(request):
-    return render(request, 'templates/base.html')
-
 from django.contrib.auth import login
 
-
-def lista_productos(request):  # Agrega esta función
+def home(request):
     productos = Producto.objects.all()
     return render(request, "inventarios/product.html", {"productos": productos})
 
@@ -21,7 +16,7 @@ def registrarProducto(request):
 
     producto = Producto.objects.create(
         nombre=nombre, descripcion=descripcion, precio=precio, stock=stock, fecha_creacion=fecha_creacion)
-    return redirect('/inventarios/')
+    return redirect('/')
 
 def edicionProducto(request, nombre):
     producto = Producto.objects.get(nombre=nombre)
@@ -43,19 +38,14 @@ def editarProducto(request):
 
     producto.save()
 
-    return redirect('/inventarios/')
+    return redirect('/')
 
 def eliminarProducto(request, nombre):
     producto = Producto.objects.get(nombre=nombre)
     producto.delete()
 
-    return redirect('/inventarios/')
+    return redirect('/')
 
-
-def loginView(request):
-    return render(request, 'login.html', {
-        'form': AuthenticationForm()
-    })
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
@@ -65,5 +55,5 @@ def login_view(request):
             return redirect('home')  # Redirige a la página principal o a donde quieras
     else:
         form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})  # Asegúrate de que la plantilla sea 'login.html'
+    return render(request, 'login.html', {'form': form})  # Asegurar de que la plantilla sea 'login.html'
 
