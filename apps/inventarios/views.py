@@ -1,7 +1,5 @@
 from django.shortcuts import render, redirect
 from .models import Producto
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import login
 
 def home(request):
     productos = Producto.objects.all()
@@ -45,15 +43,3 @@ def eliminarProducto(request, nombre):
     producto.delete()
 
     return redirect('/')
-
-def login_view(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('home')  # Redirige a la página principal o a donde quieras
-    else:
-        form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})  # Asegurar de que la plantilla sea 'login.html'
-
