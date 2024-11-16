@@ -4,15 +4,21 @@ from .models import Producto
 
 def home(request):
     productos = Producto.objects.all()
-    return render(request, "product.html", {"productos": productos})
+    return render(request, "inventarios/product.html", {"productos": productos})
 
 def registrarProducto(request):
+<<<<<<< HEAD
     # Obtener los datos del formulario
+=======
+>>>>>>> 3cb040c048bae306feb8393a85a98a8a7327dc89
     nombre = request.POST['txtNombre']
     descripcion = request.POST['txtDescripcion']
     precio = request.POST['txtPrecio']
     stock = request.POST['numStock']
+<<<<<<< HEAD
     
+=======
+>>>>>>> 3cb040c048bae306feb8393a85a98a8a7327dc89
     fecha_creacion = request.POST['txtFechaDeCreacion']
 
     # Crear el nuevo producto
@@ -49,16 +55,25 @@ def registrarProducto(request):
 
 def edicionProducto(request, nombre):
     producto = Producto.objects.get(nombre=nombre)
+<<<<<<< HEAD
     return render(request, "edicionProducto.html", {"nombre": nombre})
 
 def editarProducto(request):
     # Obtener los datos del formulario
+=======
+    return render(request, "inventarios/edicionProducto.html", {"producto": producto})
+
+def editarProducto(request):
+>>>>>>> 3cb040c048bae306feb8393a85a98a8a7327dc89
     nombre = request.POST['txtNombre']
     descripcion = request.POST['txtDescripcion']
     precio = request.POST['txtPrecio']
     stock = request.POST['numStock']
+<<<<<<< HEAD
     
     # Asegúrate de que 'txtFechaDeCreacion' es un campo de fecha
+=======
+>>>>>>> 3cb040c048bae306feb8393a85a98a8a7327dc89
     fecha_creacion = request.POST['txtFechaDeCreacion']
 
     # Obtener el producto existente por nombre

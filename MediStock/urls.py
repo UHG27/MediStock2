@@ -18,10 +18,11 @@ from os import path
 from django.urls import path, include
 from django.contrib import admin
 
-
-
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', include('apps.inventarios.urls')),
-    
+    path('admin/', admin.site.urls),
+    path('usuarios/', include('apps.usuarios.urls')),
+    path('ventas/', include('apps.ventas.urls')),
+    path('reportes/', include('apps.reportes.urls')),
 ]
+
