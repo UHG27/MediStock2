@@ -1,6 +1,17 @@
+
+
 import requests
 from django.shortcuts import render, redirect
 from .models import Producto
+from django.shortcuts import render, redirect
+from .models import Producto
+
+
+
+import requests
+from django.shortcuts import render, redirect
+from .models import Producto
+
 
 def home(request):
     productos = Producto.objects.all()
@@ -8,6 +19,12 @@ def home(request):
 
 def registrarProducto(request):
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> 0ace6c8aefeb7eab7c445ccab882fe87866d8f70
     # Obtener los datos del formulario
 =======
 >>>>>>> 3cb040c048bae306feb8393a85a98a8a7327dc89
@@ -51,11 +68,25 @@ def registrarProducto(request):
     else:
         print("Error al enviar el webhook a Zapier.", response.status_code, response.text)
 
+    nombre=request.POST['txtNombre']
+    descripcion=request.POST['txtDescripcion']
+    precio=request.POST['txtPrecio']
+    stock=request.POST['numStock']
+    fecha_creacion=request.POST['txtFechaDeCreacion']
+
+    producto = Producto.objects.create(
+        nombre=nombre, descripcion=descripcion, precio=precio, stock=stock, fecha_creacion=fecha_creacion)
+
+
     return redirect('/')
 
 def edicionProducto(request, nombre):
     producto = Producto.objects.get(nombre=nombre)
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> 0ace6c8aefeb7eab7c445ccab882fe87866d8f70
     return render(request, "edicionProducto.html", {"nombre": nombre})
 
 def editarProducto(request):
@@ -80,17 +111,45 @@ def editarProducto(request):
     producto = Producto.objects.get(nombre=nombre)
 
     # Actualizar los datos del producto
+
+    return render(request, "edicionProducto.html", {"nombre":nombre})
+
+def editarProducto(request):
+    nombre=request.POST['txtNombre']
+    descripcion=request.POST['txtDescripcion']
+    precio=request.POST['txtPrecio']
+    stock=request.POST['numStock']
+    fecha_creacion=request.POST['txtFechaDeCreacion']
+
+    producto = Producto.objects.get(nombre=nombre)
+
+
     producto.nombre = nombre
     producto.descripcion = descripcion
     producto.precio = precio
     producto.fecha_creacion = fecha_creacion
     producto.stock = stock
+
+
+
+
     producto.save()
 
     return redirect('/')
 
 def eliminarProducto(request, nombre):
+
+
     productos = Producto.objects.filter(nombre=nombre)
     if productos.exists():
         productos.delete()  # Eliminar todos los productos con el nombre dado
+
+    producto = Producto.objects.get(nombre=nombre)
+    producto.delete()
+
+
+    productos = Producto.objects.filter(nombre=nombre)
+    if productos.exists():
+        productos.delete()  # Eliminar todos los productos con el nombre dado
+
     return redirect('/')
